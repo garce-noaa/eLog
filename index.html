@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>   
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json"  type="application/manifest+json">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" href="style.css">
+<title>HMS eLog</title>
+ 
+</head>
+<body>       
+    
+    <div>    
+        <div class="topmenu">                  
+            <div class="container" id="clientIcon">
+                <img src="icons/Client2.png" class="menuicon" onclick="clientPage()" alt="Client">                    
+            </div>            
+            <div class="container" id="logbookIcon">
+                <img src="icons/Logbooks.png" class="menuicon" onclick="logbooks()" alt="Logbooks">                    
+            </div>            
+            <div class="container" id="tripInfoIcon">
+                <img src="icons/TripInfo.png" class="menuicon"  onclick="tripInfo()" alt="Trip Info">                    
+            </div>            
+            <div class="container" id="tripDataIcon">
+                <img src="icons/TripData.png" class="menuicon" onclick="tripData()" alt="Trip Data">                    
+            </div>  
+            <div class="container" id="helpIcon">
+                <img src="icons/HelpIcon.png" class="menuicon" onclick="javascript:window.open('https://www.fisheries.noaa.gov/west-coast/sustainable-fisheries/west-coast-highly-migratory-species-logbooks');" alt="Trip Data">                   
+            </div>        
+        </div>
+        
+    <div  class="divbgmain" id="client">
+        <div class="formheader">Client
+        </div>   
+        <div style="padding: 3px 0px 3px 0px;"> 
+            <div>
+                <table style="display: inline-block;"><tr><td>
+                    <label for="username" style="font-size: 0.9em;">Username:</label><br/>
+                    </td><td>
+                       <input type="text" id="username" name="username" size="14"> <br>   
+                    </td></tr>
+                    <tr><td> 
+                        <label for="pass" style="font-size: 0.9em;">Password:</label>
+                    </td><td>         
+                        <input type="password" id="pass" name="password"   size="14" required>
+                        <input type="checkbox" id="cachepass" style="width: 1.1em; height: 1.1em; vertical-align: middle;"> 
+                        <label for="cachepass" style="text-align: left; font-size: 0.8em;">Cache password</label><br>
+                    </td></tr>
+                </table><br> 
+                <input type="button" class="logbuttonwide" id="auth" value="Client Auth" onclick="clientOAuth()"/>                            
+                <input type="button" class="onlinest" id="connect"  value="Online" onclick=""/>                
+            </div>
+            <div style="align-items: center;" >
+                <textarea readonly id="console" class="console" cols="80" rows="10"></textarea>          
+            </div>   
+        </div>       
+    </div>           
+        
+    <div  class="divbgmain" id="logbooks" style="display:none;">
+        <div class="formheader">Logbooks
+        </div>   
+        <div style="padding: 4px 0px 2px 0px;">     
+            <table id="localfiles" class="localview" >
+                <thead><tr>
+                  <th>Filename</th>
+                  <th>Status</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table> 
+        </div>  
+        <div style="padding: 2px 0px 2px 0px;"> 
+            <input type="button" class="logbuttonwide" id="createLog" value="New Log" onclick="createLog()"/>
+            <input type="button" class="logbuttonwide" id="deleteLog" value="Delete Log" onclick="deleteLog()"/><br>        
+            <input type="button" class="logbuttonwide" id="editLog" value="Open Log" onclick="editLog()"/>
+            <input type="button" class="logbuttonwide" id="uploadLog" value="Upload Log" onclick="uploadLog()"/><br>  
+            <input type="button" class="logbuttonwide" id="printLog" value="Print Log" onclick="printLog()"/>
+        </div>               
+    </div>   
+        
+    <div class="divbgmain" id="tripdata" style="display:none;">
+        <div>    
+            <div class="formheader">Trip Data
+            </div>            
+            <div  id="form2" class="divbgsub">            
+            <table class="tripdata" >
+                <tr><td>
+                    <label for="tripDate">Event Date:</label>
+                    </td><td>
+                    <input type="date" class="formfield" id="tripDate" style="width:8em; font-size:1em;">
+                    </td></tr><tr><td>
+                        <label for="fishingCode">Fishing Code:</label>
+                    </td><td>
+                    <select name="fishingCode" class="formfield" id="fishingCode" style='width:10em; font-size:1em'>
+                      <option value=""> </option>    
+                      <option value="1 - In Port">1 - In Port</option>
+                      <option value="2 - Transit">2 - Transit</option>
+                      <option value="3 - Fishing">3 - Fishing</option>  
+                    </select>
+                    </td></tr><tr><td>
+                    <label for="latDeg">Latitude:</label>
+                    </td><td>
+                    <input type="text" class="formfield" id="latDeg" maxlength ="2" oninput="checkLatDeg(this)" style="width:1.8em; font-size:0.9em;" inputmode="decimal">&hairsp;&deg;
+                    <input type="text" class="formfield" id="latMin" maxlength="2" oninput="checkMin(this)" style="width:1.8em; font-size:0.9em;" inputmode="decimal">&hairsp;'                     
+                    <select title="latns" name="latNS" class="formfield" id="latNS" style='width:3em; font-size:0.9em;'>
+                        <option value="N">N</option>
+                        <option value="S">S</option>  
+                    </select>
+                    </td></tr><tr><td>
+                        <label for="lonDeg">Longitude:</label>
+                    </td><td>
+                    <input type="text" class="formfield" id="lonDeg" maxlength="3" style="width:1.8em; font-size:0.9em;" oninput="checkLonDeg(this)" inputmode="decimal">&hairsp;&deg;
+                    <input type="text" class="formfield" id="lonMin" maxlength="2" style="width:1.8em; font-size:0.9em;" oninput="checkMin(this)" inputmode="decimal">&hairsp;' 
+                    <select title="lonew" name="lonEW" class="formfield" id="lonEW" style='width:3em; font-size:0.9em;'>
+                      <option value="E">E</option>
+                      <option value="W">W</option>  
+                    </select>
+                     </td></tr>
+            </table>            
+            </div>
+        </div>
+        
+        <div class="tablediv"  id="catchdiv" style="display: none;">
+                <div class="buttonbar">
+                    <input type="button" id="saveCatch" class="logbuttonwide"  value="Save Catch" onclick="saveCatch()" style="display:none;"/>
+                </div>
+                <table id="catchtable" class="gridview2">
+                <tr><td>
+                    <label for="speciesName">Species:</label></td><td>
+                    <select name="speciesName" class="formfield" id="speciesName" style='width:10em'>
+                        <option value=""> </option>
+                        <option value="A - Albacore">A - Albacore</option>
+                        <option value="B - Yellowfin">B - Yellowfin</option>  
+                        <option value="C - Bluefin">C - Bluefin</option>  
+                        <option value="D - Other">D - Other</option>  
+                    </select>
+                    </td></tr><tr><td>
+                    <label for="catchKept">Number Kept:</label></td><td>
+                    <input type="text" class="formfield" id="catchKept"  oninput="checkCatch(this)" inputmode="decimal"/>                   
+                </td></tr><tr><td>                         
+                    <label for="catchDiscarded">Discarded:</label></td><td>
+                    <input type="text" class="formfield" id="catchDiscarded"  oninput="checkCatch(this)" inputmode="decimal"/>
+                    </td></tr><tr><td>
+                    <label for="catchDiscarded">Hours Fished</label></td><td>
+                    <input type="text" class="formfield" id="hoursFished" oninput="checkCatch(this)" inputmode="decimal"/>
+                    </td></tr><tr><td>    
+                    <label for="comments">Comments:</label></td><td>
+                    <input type="text" class="formfield" id="comments" ><br/>   
+                </td></tr>
+            </table>              
+        </div>   
+  
+        <div class="tablediv" id="tablediv">
+            <div class="buttonbar">
+            <input type="button" id="addEntry" class="logbuttonwide"   value="Add Entry"    onclick="addEntry()" />
+            <input type="button"  id="deleteEntry" class="logbuttonwide"   value="Delete Entry"    onclick="deleteEntry()" /><br>
+            <input type="button"  id="editEntry" class="edit" value="Edit Entry"  onclick="editEntry()"/>
+            <input type="button"  id="saveEntry" class="save" value="Save Entry"  onclick="saveEntry()"/>   
+            <input type="button" id="addCatch" class="logbuttonwide"  value="Catch Data" onclick="addCatch()"/>
+        </div>  
+            <table id="triptable" class="gridview" >
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Code</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>                   
+                  </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div style="padding: 3px 0px 3px 0px;">            
+            <input type="button" id="saveLog" class="logbuttonwide"  value="Save Log" onclick="saveLog()"/>
+        </div>  
+        </div>              
+          
+    </div>        
+        
+    <div class="divbgmain" id="tripinfo" style="display:none;">
+        <div>    
+            <div class="formheader">Trip Info
+            </div>
+                <div id="form1" class="divbgsub">       
+                    <div style="margin: 0px 0px 3px 0px;">
+                        &nbsp<b style="font-size: 0.9em;">Logbook:</b></br>    
+                        &nbsp<em id="logtitle" style="font-size: 0.8em;"> </em>   
+                    </div>
+                    <table class="tripinfo">
+                        <tr><td>
+                            <label for="vesselName">Vessel Name:</label>
+                            </td><td><input type="text" class="formfield" id="vesselName" value="">
+                            </td></tr><tr>                        
+                            <td><label for="captainName">Captain Name:</label>
+                            </td><td><input type="text" class="formfield" id="captainName" value="">
+                            </td></tr><tr>                            
+                            <td><label for="docNumber">Doc Number:</label>
+                            </td><td><input type="text" class="formfield" id="docNumber" value="">
+                            </td></tr><tr>                            
+                            <td><label for="landingReceipt">Landing Receipt:</label>
+                            </td><td><input type="text" class="formfield" id="landingReceipt" value="">
+                            </td></tr>
+                            <tr><td><label for="departurePort">Departure Port:</label>
+                            </td><td><input type="text" class="formfield" id="departurePort" value="">
+                            </td></tr><tr>                            
+                            <td><label for="departureDate">Departure Date:</label>
+                            </td><td><input type="date" class="formfield" id="departureDate" style="width:8em; font-size:1em">
+                            </td></tr><tr>                            
+                            <td><label for="arrivalDate">Arrival Date:</label>
+                            </td><td><input type="date" class="formfield" id="arrivalDate" style="width:8em; font-size:1em">
+                            </td></tr><tr>                            
+                            <td><label for="arrivalPort">Arrival Port:</label>
+                            </td><td><input type="text" class="formfield" id="arrivalPort" value="" >
+                            </td></tr>
+                            <tr><td><label for="portLanded">Port Landed:</label>
+                            </td><td><input type="text" class="formfield" id="portLanded" value="">
+                            </td></tr><tr>                            
+                            <td><label for="poundsLanded">Pounds Landed:</label>
+                            </td><td><input type="text" class="formfield" id="poundsLanded" value="">
+                            </td></tr><tr>                            
+                            <td><label for="gear">Gear Used:</label>
+                            </td><td>
+                            <select name="Gear" id="gear" style="width:8em; font-size:0.9em">
+                                <option value="Troll">Troll</option>
+                                <option value="Pole & Line">Pole & Line</option>
+                                <option value="Rod & Reel">Rod & Reel</option>  
+                            </select>    
+                        </td></tr>
+                    </table>                
+                </div>            
+                <div style="padding: 5px 0px 5px 0px;">           
+                <input type="button" id="saveLog2" class="logbuttonwide"  value="Save Log" onclick="saveLog()"/>
+                </div>     
+            </div>    
+        </div>        
+    </div>  
+    <br>
+
+    <div class="footer">&nbspHMS eLog version b1.1 <br>&nbspSupport: swfsc.hms.logbooks@noaa.gov</div>   
+
+<script src="elog.js"></script>
+
+<script>
+    
+function tripInfo(){ 
+    document.getElementById("tripinfo").style.display="block";
+    document.getElementById("client").style.display="none";
+    document.getElementById("logbooks").style.display="none";
+    document.getElementById("tripdata").style.display="none";    
+    
+    document.getElementById("clientIcon").innerHTML='<img src="icons/Client.png" onclick="clientPage()" class="menuicon">';
+    document.getElementById("tripInfoIcon").innerHTML='<img src="icons/TripInfo2.png" onclick="tripInfo()" class="menuicon">';
+    document.getElementById("tripDataIcon").innerHTML='<img src="icons/TripData.png" onclick="tripData()" class="menuicon">';
+    document.getElementById("logbookIcon").innerHTML='<img src="icons/Logbooks.png" onclick="logbooks()" class="menuicon">';    
+}
+function tripData(){ 
+    document.getElementById("tripinfo").style.display="none";
+    document.getElementById("client").style.display="none";
+    document.getElementById("logbooks").style.display="none";
+    document.getElementById("tripdata").style.display="block";
+    
+    document.getElementById("clientIcon").innerHTML='<img src="icons/Client.png" onclick="clientPage()" class="menuicon">';
+    document.getElementById("tripInfoIcon").innerHTML='<img src="icons/TripInfo.png" onclick="tripInfo()" class="menuicon">';
+    document.getElementById("tripDataIcon").innerHTML='<img src="icons/TripData2.png" onclick="tripData()" class="menuicon">';
+    document.getElementById("logbookIcon").innerHTML='<img src="icons/Logbooks.png" onclick="logbooks()" class="menuicon">';        
+}
+function clientPage(){ 
+    document.getElementById("tripinfo").style.display="none";
+    document.getElementById("client").style.display="block";
+    document.getElementById("logbooks").style.display="none";
+    document.getElementById("tripdata").style.display="none";
+    
+    document.getElementById("clientIcon").innerHTML='<img src="icons/Client2.png" onclick="clientPage()" class="menuicon">';
+    document.getElementById("tripInfoIcon").innerHTML='<img src="icons/TripInfo.png" onclick="tripInfo()" class="menuicon">';
+    document.getElementById("tripDataIcon").innerHTML='<img src="icons/TripData.png" onclick="tripData()" class="menuicon">';
+    document.getElementById("logbookIcon").innerHTML='<img src="icons/Logbooks.png" onclick="logbooks()" class="menuicon">';    
+}
+function logbooks(){ 
+    document.getElementById("tripinfo").style.display="none";
+    document.getElementById("client").style.display="none";
+    document.getElementById("logbooks").style.display="block";
+    document.getElementById("tripdata").style.display="none";
+    
+    document.getElementById("clientIcon").innerHTML='<img src="icons/Client.png" onclick="clientPage()" class="menuicon">';
+    document.getElementById("tripInfoIcon").innerHTML='<img src="icons/TripInfo.png" onclick="tripInfo()" class="menuicon">';
+    document.getElementById("tripDataIcon").innerHTML='<img src="icons/TripData.png" onclick="tripData()" class="menuicon">';
+    document.getElementById("logbookIcon").innerHTML='<img src="icons/Logbooks2.png" onclick="logbooks()" class="menuicon">';    
+}
+
+if (window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: fullscreen)').matches ) {
+  document.getElementById("installApp").style.display = 'none';
+  document.getElementById("cert").style.display = 'none';
+}  
+  
+navigator.serviceWorker.register('sw.js', {scope: './'});
+    if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('sw.js')
+    .then(function(registration) {    
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(function(err) {     
+      console.log('ServiceWorker registration failed: ', err);
+    });
+}
+
+let installPromptEvent;
+
+window.addEventListener('beforeinstallprompt', event => {  
+  event.preventDefault(); 
+  installPromptEvent = event;    
+});    
+</script>
+  
+</body>
+</html>

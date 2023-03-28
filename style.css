@@ -1,0 +1,365 @@
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    font-family: verdana;    
+    background-color: #F4F9FD;
+}
+.tablediv {
+    display:block;
+    overflow-x: auto;
+}
+.gridview
+{
+    border-collapse: collapse;
+    box-shadow: 0px 0px 0px 0px #bbb;    
+    width: 100%;
+    max-width: 27em;
+    font-size: 0.8em;
+    vertical-align: middle;
+    border:  1px solid #cccccc;  
+    font-family: verdana;
+}
+.gridview th 
+{
+    font-weight: normal;    
+    color: #F9F9F9;    
+    background: #0085CA;  
+    border:  1px solid #cccccc;
+    padding: 3px 3px 3px 3px;
+}
+.gridview td:nth-child(1), .gridview th:nth-child(1) { min-width: 1.5em; max-width: 1.5em;}
+.gridview td:nth-child(2), .gridview th:nth-child(2) { min-width: 6.5em; max-width: 6.5em;}
+.gridview td:nth-child(3), .gridview th:nth-child(3) { min-width: 6em; max-width: 6em;}
+.gridview td:nth-child(4), .gridview th:nth-child(4) { min-width: 5.5em; max-width: 5.5em;}
+.gridview td:nth-child(5) { min-width: 5.5em; max-width: 5.5em;}
+.gridview th:nth-child(5) { min-width: 5.5em; max-width: 5.5em;}
+.gridview tr:nth-child(odd)  {background-color: #F4F9FD;}
+.gridview tr:nth-child(even) {background-color: #EDF5FC;}
+.gridview tbody 
+{
+    height: 18em;
+    overflow-y: scroll;    
+}
+.gridview thead > tr, .gridview tbody
+{     
+    display:block;
+    text-align: left;
+}  
+.gridview tbody td
+{
+    padding: 3px 3px 3px 3px;   
+    font-weight: normal;    
+    text-align: left;
+    vertical-align: top;
+    max-width: 22em;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;    
+    border:  1px solid #cccccc;
+}
+.gridview .selected, .gridview tbody .selected
+{
+    background-color: #6CCBD9;
+    color: #696969;
+}   
+.localview
+{
+    border-collapse: collapse;
+    box-shadow: 0px 0px 0px #bbb;    
+    width: 100%;
+    max-height: 22em;
+    height: 22em;
+    max-width: 28em;
+    font-size: 0.8em;
+    font-family: verdana;    
+    vertical-align: middle;
+    border:  1px solid #cccccc;      
+}
+.localview th 
+{   
+    font-weight: 500;    
+    color: #F9F9F9;    
+    background: #0085CA;  
+    border:  1px solid #cccccc;
+    padding: 3px 3px 3px 3px;
+}
+.localview td:nth-child(1), .localview th:nth-child(1) { min-width: 22em; max-width: 22em;}
+.localview td:nth-child(2)  { min-width: 5em; max-width: 5em;}
+.localview th:nth-child(2) { min-width: 5em; max-width: 5em;}
+
+.localview tbody 
+{
+    overflow-y: scroll;   
+    height: 20em;
+}
+.localview thead > tr, .localview tbody
+{     
+    display:block;
+    text-align: left;
+}  
+.localview tbody td
+{
+    padding: 3px 3px 3px 3px;    
+    font-weight: normal;    
+    text-align: left;
+    vertical-align: top;    
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;    
+    border:  1px solid #cccccc;
+}
+.localview .selected, .localview tbody .selected
+{
+    background-color: #6CCBD9;
+    color: #696969;
+}
+.save
+{
+  background-color: #0085CA; 
+  border: 2px solid #003087;
+  color: white;
+  padding: 2px 3px 2px 3px;
+  text-align: center;
+  text-decoration: none;
+  display: none;
+  font-family: verdana;
+  font-weight: 600;
+  font-size: 0.8rem;
+  -webkit-border-radius: 0.1rem;	
+  width: 12em;
+  height: 2em;
+  margin: 3px 0px 3px 0px;
+}    
+.save:hover {
+  background-color: #00467F;
+  color: white;
+}
+.edit {
+  background-color: #0085CA; 
+  border: 2px solid #003087;
+  color: white;
+  padding: 2px 3px 2px 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: verdana;
+  font-weight: 600;
+  font-size: 0.8rem;
+  -webkit-border-radius: 0rem;	
+  width: 12em;
+  height: 2em;
+  margin: 3px 0px 3px 0px;
+}
+.edit:hover {
+  background-color: #00467F;
+  color: white;
+}
+.logbutton {
+  background-color: #0085CA; 
+  border: 2px solid #003087;
+  color: white;
+  padding: 0px 0px 0px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.8rem;
+  font-family: verdana;
+  font-weight: 600;
+  -webkit-border-radius: 0em;
+  width: 7em;
+  height: 2em;
+  align-items: center; 
+}
+.logbutton:hover {
+  background-color: #00467F;
+  color: white;
+}
+
+.logbuttonwide {
+  background-color: #0085CA; 
+  border: 2px solid #003087;
+  color: white;
+  padding: 0px 0px 0px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-table;
+  font-size: 0.8rem;
+  font-family: verdana;
+  font-weight: 600;
+  -webkit-border-radius: 0em;
+  width: 12em;
+  height: 2em;
+  align-items: center; 
+  margin: 3px 0px 3px 0px;
+}
+.logbuttonwide:hover {
+  background-color: #00467F;
+  color: white;
+}
+
+
+.tripinfo
+{
+    margin: 0px 0px 0px 0px;
+    border-collapse: collapse;       
+    font-size: 1em;
+    vertical-align: bottom;    
+}
+.tripinfo td 
+{
+    font-weight: 500;    
+    text-align: left;
+    vertical-align: top;
+    padding: 2px 2px 2px 2px;
+}
+.tripinfo td:nth-child(1) { min-width: 9em; max-width: 9em;}
+.tripinfo td:nth-child(2) { min-width: 11em; max-width: 11em;}
+
+
+.tripdata
+{
+    margin: 0px 0px 0px 0px;
+    border-collapse: collapse;       
+    font-size: 1em;
+    vertical-align: bottom;    
+}
+.tripdata td 
+{
+    font-weight: 500;    
+    text-align: left;
+    vertical-align: top;
+    padding: 2px 5px 2px 5px;
+}
+.tripdata td:nth-child(1) { min-width: 8em; max-width: 8em;}
+.tripdata td:nth-child(2) { min-width: 12em; max-width: 12em;}
+
+.console
+{
+    overflow-y:scroll;
+    resize: none;
+    font-family:"Courier new";  
+    font-size: 0.9em;
+    width: 25em;
+    height: 20em;
+    border-collapse: collapse;
+    border:  1px solid #cccccc;
+    align-self: center;
+    margin: 10px 0px 0px 0px;
+}
+.onlinest {
+  background-color:#060;   
+  border: 2px solid #003087;
+  color: white;
+  width: 7em;
+  padding: 2px 3px 2px 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.8em;
+  font-family: verdana;
+  font-weight: 600;
+  -webkit-border-radius: 0em;    
+  width: 10em;
+  height: 2em; 
+  margin: 3px 0px 3px 0px;
+}
+.offlinest {
+  background-color:#900;   
+  border: 2px solid #003087;
+  color: white;
+  width: 7em;
+  padding: 2px 3px 2px 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.8em;
+  font-family: verdana;
+  font-weight: 600;
+  -webkit-border-radius: 0em;  
+  width: 10em;
+  height: 2em; 
+  margin: 3px 0px 3px 0px;
+}
+.editfield
+{
+    font-size:0.9em;    
+}
+.formfield
+{
+    font-size:0.8em;  
+    width: 9.4em;
+}
+.divbgmain {    
+  background-color: #F4F9FD;
+  width:100%;
+  display:block;
+  padding: 0px 1px 0px 1px;
+  box-shadow: 0px 0px 0px #bbb;   
+  vertical-align: middle;
+  align-content: center;
+  border:  0px solid #cccccc;     
+  margin-top: 4.3em;    
+  margin-bottom: 1.5em;    
+}
+
+.divbgsub {    
+  background-color: #F4F9FD;
+  width:100%; 
+  padding: 3px 0px 3px 0px;  
+  border:  0px solid #cccccc;   
+}
+.formheader {    
+  background-color: #00467F; 
+  height: 1em;   
+  color: white;  
+  font-weight: bold;
+  font-size:1.1em;  
+  text-align: left;
+  padding: 5px 8px 8px 8px;
+  vertical-align: top;
+}
+.topmenu {    
+  background-color: #F4F9FD; 
+  width:100%;
+  overflow: hidden;
+  display:inline-block;  
+  border:  0px solid  #003087;
+  position: fixed;
+  top: 0;
+  float: top;
+  text-align: justify ;
+  margin: 1px 1px 1px 1px;
+}
+.container {
+  position: relative;
+  width: 4.2em;
+  display:inline-block;
+}
+.menuicon {    
+  width:4.2em; 
+  display:grid;
+  padding: 0px 0px 0px 0px;  
+  border:  1px solid  #003087; 
+
+}
+.footer {
+   position: fixed;   
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   height: 2.6em;
+   font-size: 0.9em;
+   text-align: left;
+   margin-bottom: 0px;
+   background-color: #F4F9FD;   
+}
+.buttonbar {    
+  background-color: #F4F9FD;     
+  display: inline-block;  
+  border:  0px solid  #003087;  
+  padding: 0px 0px 3px 0px;
+  justify-content: space-between; 
+}

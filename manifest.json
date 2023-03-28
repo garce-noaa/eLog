@@ -1,0 +1,24 @@
+{
+  "id": "index.html",
+  "lang": "en",
+  "name": "HMS eLog Application",
+  "description": "HMS eLog data entry application for albacore logbooks",
+  "short_name": "HMS eLog",  
+  "icons": [{
+    "src": "favicon.ico",
+    "sizes": "32x32",
+    "type": "image/webp"	
+  },
+  {
+      "src": "noaaico.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }],
+  "scope": "./",
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "theme_color": "aliceblue",
+  "background_color": "white",
+  "content-type":"application/json"
+}
