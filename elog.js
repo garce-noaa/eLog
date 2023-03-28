@@ -120,12 +120,12 @@ function createLog(){
 
 function deleteLog(){
     if (editidx.length <= 0){
-         window.alert("No entry selected");      
+         window.alert("No entry selected.");      
          return;
     }  
     var log = localStorage.getItem(editidx[0]);
     
-    if (confirm("Confirm delete log") === true) {
+    if (confirm("Confirm delete log: "+editidx[0]) === true) {
         localStorage.removeItem(editidx[0]);
     }     
     editidx = [];
